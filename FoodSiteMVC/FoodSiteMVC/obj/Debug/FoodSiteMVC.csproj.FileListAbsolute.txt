@@ -345,7 +345,3 @@ C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\bin\Micros
 C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\obj\Debug\FoodSiteMVC.csprojResolveAssemblyReference.cache
 C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\obj\Debug\FoodSiteMVC.dll
 C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\obj\Debug\FoodSiteMVC.pdb
-C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\obj\Debug\FoodSiteMVC.Migrations.InitialCreate.resources
-C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\obj\Debug\FoodSiteMVC.csproj.GenerateResource.Cache
-C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\obj\Debug\FoodSiteMVC.Migrations.test.resources
-C:\Users\jonto\Documents\GitHub\New-Food-Site\FoodSiteMVC\FoodSiteMVC\obj\Debug\FoodSiteMVC.Migrations.newMigration.resources

@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-
-
-namespace FoodSiteMVC.Models
+﻿namespace FoodSiteMVC.Models
 {
     public class Orders
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
+        public int Id { get; set; }
+        public string customerName { get; set; }
+        public decimal orderPrice { get; set; }
     }
 
-    public class OrdersDBContext : DbContext
-    {
-        public DbSet<Orders> Orders { get; set; }
-    }
 }
