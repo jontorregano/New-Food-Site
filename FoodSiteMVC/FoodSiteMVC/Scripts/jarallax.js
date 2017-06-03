@@ -8,18 +8,17 @@
     'use strict';
 
     // Adapted from https://gist.github.com/paulirish/1579671
-    if(!Date.now) {
+    if (!Date.now) {
         Date.now = function () { return new Date().getTime(); };
     }
-    if(!window.requestAnimationFrame) {
+    if (!window.requestAnimationFrame) {
         (function () {
-
             var vendors = ['webkit', 'moz'];
             for (var i = 0; i < vendors.length && !window.requestAnimationFrame; ++i) {
                 var vp = vendors[i];
-                window.requestAnimationFrame = window[vp+'RequestAnimationFrame'];
-                window.cancelAnimationFrame = window[vp+'CancelAnimationFrame']
-                                           || window[vp+'CancelRequestAnimationFrame'];
+                window.requestAnimationFrame = window[vp + 'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vp + 'CancelAnimationFrame']
+                    || window[vp + 'CancelRequestAnimationFrame'];
             }
             if (/iP(ad|hone|od).*OS 6/.test(window.navigator.userAgent) // iOS6 is buggy
                 || !window.requestAnimationFrame || !window.cancelAnimationFrame) {
@@ -28,7 +27,7 @@
                     var now = Date.now();
                     var nextTime = Math.max(lastTime + 16, now);
                     return setTimeout(function () { callback(lastTime = nextTime); },
-                                      nextTime - now);
+                        nextTime - now);
                 };
                 window.cancelAnimationFrame = clearTimeout;
             }
@@ -43,11 +42,11 @@
         var el = document.createElement('p'),
             has3d,
             transforms = {
-                'webkitTransform':'-webkit-transform',
-                'OTransform':'-o-transform',
-                'msTransform':'-ms-transform',
-                'MozTransform':'-moz-transform',
-                'transform':'transform'
+                'webkitTransform': '-webkit-transform',
+                'OTransform': '-o-transform',
+                'msTransform': '-ms-transform',
+                'MozTransform': '-moz-transform',
+                'transform': 'transform'
             };
 
         // Add it to the body to get the computed style.
@@ -75,7 +74,7 @@
 
     var wndW;
     var wndH;
-    function updateWndVars () {
+    function updateWndVars() {
         wndW = window.innerWidth || document.documentElement.clientWidth;
         wndH = window.innerHeight || document.documentElement.clientHeight;
     }
@@ -89,35 +88,35 @@
     var Jarallax = (function () {
         var instanceID = 0;
 
-        function Jarallax_inner (item, userOptions) {
+        function Jarallax_inner(item, userOptions) {
             var _this = this,
                 dataOptions;
 
-            _this.$item      = item;
+            _this.$item = item;
 
-            _this.defaults   = {
-                type              : 'scroll', // type of parallax: scroll, scale, opacity, scale-opacity, scroll-opacity
-                speed             : 0.5, // supported value from -1 to 2
-                imgSrc            : null,
-                imgWidth          : null,
-                imgHeight         : null,
-                enableTransform   : true,
-                elementInViewport : null,
-                zIndex            : -100,
-                noAndroid         : false,
-                noIos             : true,
+            _this.defaults = {
+                type: 'scroll', // type of parallax: scroll, scale, opacity, scale-opacity, scroll-opacity
+                speed: 0.5, // supported value from -1 to 2
+                imgSrc: null,
+                imgWidth: null,
+                imgHeight: null,
+                enableTransform: true,
+                elementInViewport: null,
+                zIndex: -100,
+                noAndroid: false,
+                noIos: true,
 
                 // events
-                onScroll          : null, // function(calculations) {}
-                onInit            : null, // function() {}
-                onDestroy         : null, // function() {}
-                onCoverImage      : null  // function() {}
+                onScroll: null, // function(calculations) {}
+                onInit: null, // function() {}
+                onDestroy: null, // function() {}
+                onCoverImage: null  // function() {}
             };
-            dataOptions      = JSON.parse(_this.$item.getAttribute('data-jarallax') || '{}');
-            _this.options    = _this.extend({}, _this.defaults, dataOptions, userOptions);
+            dataOptions = JSON.parse(_this.$item.getAttribute('data-jarallax') || '{}');
+            _this.options = _this.extend({}, _this.defaults, dataOptions, userOptions);
 
             // stop init if android or ios
-            if(isAndroid && _this.options.noAndroid || isIOs && _this.options.noIos) {
+            if (isAndroid && _this.options.noAndroid || isIOs && _this.options.noIos) {
                 return;
             }
 
@@ -127,29 +126,29 @@
             // custom element to check if parallax in viewport
             var elementInVP = _this.options.elementInViewport;
             // get first item from array
-            if(elementInVP && typeof elementInVP === 'object' && typeof elementInVP.length !== 'undefined') {
+            if (elementInVP && typeof elementInVP === 'object' && typeof elementInVP.length !== 'undefined') {
                 elementInVP = elementInVP[0];
             }
             // check if dom element
-            if(!elementInVP instanceof Element) {
+            if (!elementInVP instanceof Element) {
                 elementInVP = null;
             }
             _this.options.elementInViewport = elementInVP;
 
             _this.instanceID = instanceID++;
 
-            _this.image      = {
-                src        : _this.options.imgSrc || null,
-                $container : null,
-                $item      : null,
-                width      : _this.options.imgWidth || null,
-                height     : _this.options.imgHeight || null,
+            _this.image = {
+                src: _this.options.imgSrc || null,
+                $container: null,
+                $item: null,
+                width: _this.options.imgWidth || null,
+                height: _this.options.imgHeight || null,
                 // fix for some devices
                 // use <img> instead of background image - more smoothly
-                useImgTag  : isIOs || isAndroid || isOperaOld || isIE11 || isIE10 || isEdge
+                useImgTag: isIOs || isAndroid || isOperaOld || isIE11 || isIE10 || isEdge
             };
 
-            if(_this.initImg()) {
+            if (_this.initImg()) {
                 _this.init();
             }
         }
@@ -159,19 +158,19 @@
 
     // add styles to element
     Jarallax.prototype.css = function (el, styles) {
-        if(typeof styles === 'string') {
-            if(window.getComputedStyle) {
+        if (typeof styles === 'string') {
+            if (window.getComputedStyle) {
                 return window.getComputedStyle(el).getPropertyValue(styles);
             }
             return el.style[styles];
         }
 
         // add transform property with vendor prefixes
-        if(styles.transform) {
+        if (styles.transform) {
             styles.WebkitTransform = styles.MozTransform = styles.transform;
         }
 
-        for(var k in styles) {
+        for (var k in styles) {
             el.style[k] = styles[k];
         }
         return el;
@@ -197,8 +196,8 @@
         var _this = this;
 
         // get image src
-        if(_this.image.src === null) {
-            _this.image.src = _this.css(_this.$item, 'background-image').replace(/^url\(['"]?/g,'').replace(/['"]?\)$/g,'');
+        if (_this.image.src === null) {
+            _this.image.src = _this.css(_this.$item, 'background-image').replace(/^url\(['"]?/g, '').replace(/['"]?\)$/g, '');
         }
         return !(!_this.image.src || _this.image.src === 'none');
     };
@@ -206,16 +205,16 @@
     Jarallax.prototype.init = function () {
         var _this = this,
             containerStyles = {
-                position         : 'absolute',
-                top              : 0,
-                left             : 0,
-                width            : '100%',
-                height           : '100%',
-                overflow         : 'hidden',
-                pointerEvents    : 'none'
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                overflow: 'hidden',
+                pointerEvents: 'none'
             },
             imageStyles = {
-                position         : 'fixed'
+                position: 'fixed'
             };
 
         // save default user styles
@@ -237,18 +236,18 @@
         _this.image.$container = document.createElement('div');
         _this.css(_this.image.$container, containerStyles);
         _this.css(_this.image.$container, {
-            visibility : 'hidden',
-            'z-index'  : _this.options.zIndex
+            visibility: 'hidden',
+            'z-index': _this.options.zIndex
         });
         _this.image.$container.setAttribute('id', 'jarallax-container-' + _this.instanceID);
         _this.$item.appendChild(_this.image.$container);
 
         // use img tag
-        if(_this.image.useImgTag && supportTransform && _this.options.enableTransform) {
+        if (_this.image.useImgTag && supportTransform && _this.options.enableTransform) {
             _this.image.$item = document.createElement('img');
             _this.image.$item.setAttribute('src', _this.image.src);
             imageStyles = _this.extend({
-                'max-width' : 'none'
+                'max-width': 'none'
             }, containerStyles, imageStyles);
         }
 
@@ -256,15 +255,15 @@
         else {
             _this.image.$item = document.createElement('div');
             imageStyles = _this.extend({
-                'background-position' : '50% 50%',
-                'background-size'     : '100% auto',
-                'background-repeat'   : 'no-repeat no-repeat',
-                'background-image'    : 'url("' + _this.image.src + '")'
+                'background-position': '50% 50%',
+                'background-size': '100% auto',
+                'background-repeat': 'no-repeat no-repeat',
+                'background-image': 'url("' + _this.image.src + '")'
             }, containerStyles, imageStyles);
         }
 
         // fix for IE9 and less
-        if(isIElt10) {
+        if (isIElt10) {
             imageStyles.backgroundAttachment = 'fixed';
         }
 
@@ -274,7 +273,7 @@
         var $itemParents = _this.$item;
         while ($itemParents !== null && $itemParents !== document && _this.parentWithTransform === 0) {
             var parent_transform = _this.css($itemParents, '-webkit-transform') || _this.css($itemParents, '-moz-transform') || _this.css($itemParents, 'transform');
-            if(parent_transform && parent_transform !== 'none') {
+            if (parent_transform && parent_transform !== 'none') {
                 _this.parentWithTransform = 1;
 
                 // add transform on parallax container if there is parent with transform
@@ -290,36 +289,36 @@
         _this.image.$container.appendChild(_this.image.$item);
 
         // cover image if width and height is ready
-        function initAfterReady () {
+        function initAfterReady() {
             _this.coverImage();
             _this.clipContainer();
             _this.onScroll(true);
 
             // call onInit event
-            if(_this.options.onInit) {
+            if (_this.options.onInit) {
                 _this.options.onInit.call(_this);
             }
 
             // timeout to fix IE blinking
             setTimeout(function () {
-                if(_this.$item) {
+                if (_this.$item) {
                     // remove default user background
                     _this.css(_this.$item, {
-                        'background-image'      : 'none',
-                        'background-attachment' : 'scroll',
-                        'background-size'       : 'auto'
+                        'background-image': 'none',
+                        'background-attachment': 'scroll',
+                        'background-size': 'auto'
                     });
                 }
             }, 0);
         }
 
-        if(_this.image.width && _this.image.height) {
+        if (_this.image.width && _this.image.height) {
             // init if width and height already exists
             initAfterReady();
         } else {
             // load image and get width and height
             _this.getImageSize(_this.image.src, function (width, height) {
-                _this.image.width  = width;
+                _this.image.width = width;
                 _this.image.height = height;
                 initAfterReady();
             });
@@ -332,8 +331,8 @@
         var _this = this;
 
         // remove from instances list
-        for(var k = 0, len = jarallaxList.length; k < len; k++) {
-            if(jarallaxList[k].instanceID === _this.instanceID) {
+        for (var k = 0, len = jarallaxList.length; k < len; k++) {
+            if (jarallaxList[k].instanceID === _this.instanceID) {
                 jarallaxList.splice(k, 1);
                 break;
             }
@@ -343,20 +342,20 @@
         var originalStylesTag = _this.$item.getAttribute('data-jarallax-original-styles');
         _this.$item.removeAttribute('data-jarallax-original-styles');
         // null occurs if there is no style tag before jarallax init
-        if(originalStylesTag === 'null') {
+        if (originalStylesTag === 'null') {
             _this.$item.removeAttribute('style');
         } else {
             _this.$item.setAttribute('style', originalStylesTag);
         }
 
         // remove additional dom elements
-        if(_this.$clipStyles) {
+        if (_this.$clipStyles) {
             _this.$clipStyles.parentNode.removeChild(_this.$clipStyles);
         }
         _this.image.$container.parentNode.removeChild(_this.image.$container);
 
         // call onDestroy event
-        if(_this.options.onDestroy) {
+        if (_this.options.onDestroy) {
             _this.options.onDestroy.call(_this);
         }
 
@@ -364,13 +363,13 @@
         delete _this.$item.jarallax;
 
         // delete all variables
-        for(var n in _this) {
+        for (var n in _this) {
             delete _this[n];
         }
     };
 
     Jarallax.prototype.getImageSize = function (src, callback) {
-        if(!src || !callback) {
+        if (!src || !callback) {
             return;
         }
 
@@ -385,16 +384,16 @@
     // overlapping occur due to an image position fixed inside absolute position element (webkit based browsers works without any fix)
     Jarallax.prototype.clipContainer = function () {
         // clip is not working properly on real IE9 and less
-        if(isIElt10) {
+        if (isIElt10) {
             return;
         }
 
-        var _this  = this,
-            rect   = _this.image.$container.getBoundingClientRect(),
-            width  = rect.width,
+        var _this = this,
+            rect = _this.image.$container.getBoundingClientRect(),
+            width = rect.width,
             height = rect.height;
 
-        if(!_this.$clipStyles) {
+        if (!_this.$clipStyles) {
             _this.$clipStyles = document.createElement('style');
             _this.$clipStyles.setAttribute('type', 'text/css');
             _this.$clipStyles.setAttribute('id', '#jarallax-clip-' + _this.instanceID);
@@ -410,7 +409,7 @@
         ].join('\n');
 
         // add clip styles inline (this method need for support IE8 and less browsers)
-        if (_this.$clipStyles.styleSheet){
+        if (_this.$clipStyles.styleSheet) {
             _this.$clipStyles.styleSheet.cssText = styles;
         } else {
             _this.$clipStyles.innerHTML = styles;
@@ -420,26 +419,26 @@
     Jarallax.prototype.coverImage = function () {
         var _this = this;
 
-        if(!_this.image.width || !_this.image.height) {
+        if (!_this.image.width || !_this.image.height) {
             return;
         }
 
-        var rect       = _this.image.$container.getBoundingClientRect(),
-            contW      = rect.width,
-            contH      = rect.height,
-            contL      = rect.left,
-            imgW       = _this.image.width,
-            imgH       = _this.image.height,
-            speed      = _this.options.speed,
-            isScroll   = _this.options.type === 'scroll' || _this.options.type === 'scroll-opacity',
+        var rect = _this.image.$container.getBoundingClientRect(),
+            contW = rect.width,
+            contH = rect.height,
+            contL = rect.left,
+            imgW = _this.image.width,
+            imgH = _this.image.height,
+            speed = _this.options.speed,
+            isScroll = _this.options.type === 'scroll' || _this.options.type === 'scroll-opacity',
             scrollDist = 0,
-            resultW    = 0,
-            resultH    = contH,
-            resultML   = 0,
-            resultMT   = 0;
+            resultW = 0,
+            resultH = contH,
+            resultML = 0,
+            resultMT = 0;
 
         // scroll parallax
-        if(isScroll) {
+        if (isScroll) {
             // scroll distance and height for image
             if (speed < 0) {
                 scrollDist = speed * Math.max(contH, wndH);
@@ -452,7 +451,7 @@
                 resultH = Math.abs(scrollDist - wndH);
             } else if (speed < 0) {
                 resultH = scrollDist / speed + Math.abs(scrollDist);
-            }  else {
+            } else {
                 resultH += Math.abs(wndH - contH) * (1 - speed);
             }
 
@@ -461,20 +460,20 @@
 
         // calculate width relative to height and image size
         resultW = resultH * imgW / imgH;
-        if(resultW < contW) {
+        if (resultW < contW) {
             resultW = contW;
             resultH = resultW * imgH / imgW;
         }
 
         // when disabled transformations, height should be >= window height
         _this.bgPosVerticalCenter = 0;
-        if(isScroll && resultH < wndH && (!supportTransform || !_this.options.enableTransform)) {
+        if (isScroll && resultH < wndH && (!supportTransform || !_this.options.enableTransform)) {
             _this.bgPosVerticalCenter = (wndH - resultH) / 2;
             resultH = wndH;
         }
 
         // center parallax image
-        if(isScroll) {
+        if (isScroll) {
             resultML = contL + (contW - resultW) / 2;
             resultMT = (wndH - resultH) / 2;
         } else {
@@ -483,7 +482,7 @@
         }
 
         // fix if parents with transform style
-        if(supportTransform && _this.options.enableTransform && _this.parentWithTransform) {
+        if (supportTransform && _this.options.enableTransform && _this.parentWithTransform) {
             resultML -= contL;
         }
 
@@ -499,7 +498,7 @@
         });
 
         // call onCoverImage event
-        if(_this.options.onCoverImage) {
+        if (_this.options.onCoverImage) {
             _this.options.onCoverImage.call(_this);
         }
     };
@@ -511,22 +510,22 @@
     Jarallax.prototype.onScroll = function (force) {
         var _this = this;
 
-        if(!_this.image.width || !_this.image.height) {
+        if (!_this.image.width || !_this.image.height) {
             return;
         }
 
-        var rect   = _this.$item.getBoundingClientRect(),
-            contT  = rect.top,
-            contH  = rect.height,
+        var rect = _this.$item.getBoundingClientRect(),
+            contT = rect.top,
+            contH = rect.height,
             styles = {
-                position           : 'absolute',
-                visibility         : 'visible',
-                backgroundPosition : '50% 50%'
+                position: 'absolute',
+                visibility: 'visible',
+                backgroundPosition: '50% 50%'
             };
 
         // check if in viewport
         var viewportRect = rect;
-        if(_this.options.elementInViewport) {
+        if (_this.options.elementInViewport) {
             viewportRect = _this.options.elementInViewport.getBoundingClientRect();
         }
         _this.isElementInViewport =
@@ -551,10 +550,10 @@
 
         // calculate on how percent of section is visible
         var visiblePercent = 1;
-        if(contH < wndH) {
+        if (contH < wndH) {
             visiblePercent = 1 - (afterTop || beforeBottom) / contH;
         } else {
-            if(beforeTopEnd <= wndH) {
+            if (beforeTopEnd <= wndH) {
                 visiblePercent = beforeTopEnd / wndH;
             } else if (beforeBottomEnd <= wndH) {
                 visiblePercent = beforeBottomEnd / wndH;
@@ -562,15 +561,15 @@
         }
 
         // opacity
-        if(_this.options.type === 'opacity' || _this.options.type === 'scale-opacity' || _this.options.type === 'scroll-opacity') {
+        if (_this.options.type === 'opacity' || _this.options.type === 'scale-opacity' || _this.options.type === 'scroll-opacity') {
             styles.transform = 'translate3d(0, 0, 0)';
             styles.opacity = visiblePercent;
         }
 
         // scale
-        if(_this.options.type === 'scale' || _this.options.type === 'scale-opacity') {
+        if (_this.options.type === 'scale' || _this.options.type === 'scale-opacity') {
             var scale = 1;
-            if(_this.options.speed < 0) {
+            if (_this.options.speed < 0) {
                 scale -= _this.options.speed * visiblePercent;
             } else {
                 scale += _this.options.speed * (1 - visiblePercent);
@@ -579,12 +578,12 @@
         }
 
         // scroll
-        if(_this.options.type === 'scroll' || _this.options.type === 'scroll-opacity') {
+        if (_this.options.type === 'scroll' || _this.options.type === 'scroll-opacity') {
             var positionY = _this.parallaxScrollDistance * fromViewportCenter;
 
-            if(supportTransform && _this.options.enableTransform) {
+            if (supportTransform && _this.options.enableTransform) {
                 // fix if parents with transform style
-                if(_this.parentWithTransform) {
+                if (_this.parentWithTransform) {
                     positionY -= contT;
                 }
 
@@ -593,7 +592,7 @@
                 styles.top = positionY + 'px';
             } else {
                 // vertical centering
-                if(_this.bgPosVerticalCenter) {
+                if (_this.bgPosVerticalCenter) {
                     positionY += _this.bgPosVerticalCenter;
                 }
                 styles.backgroundPosition = '50% ' + positionY + 'px';
@@ -607,7 +606,7 @@
         _this.css(_this.image.$item, styles);
 
         // call onScroll event
-        if(_this.options.onScroll) {
+        if (_this.options.onScroll) {
             _this.options.onScroll.call(_this, {
                 section: rect,
 
@@ -624,26 +623,25 @@
         }
     };
 
-
     // init events
-    function addEventListener (el, eventName, handler) {
+    function addEventListener(el, eventName, handler) {
         if (el.addEventListener) {
             el.addEventListener(eventName, handler);
         } else {
-            el.attachEvent('on' + eventName, function (){
+            el.attachEvent('on' + eventName, function () {
                 handler.call(el);
             });
         }
     }
 
-    function update (e) {
+    function update(e) {
         window.requestAnimationFrame(function () {
-            if(e.type !== 'scroll') {
+            if (e.type !== 'scroll') {
                 updateWndVars();
             }
-            for(var k = 0, len = jarallaxList.length; k < len; k++) {
+            for (var k = 0, len = jarallaxList.length; k < len; k++) {
                 // cover image and clip needed only when parallax container was changed
-                if(e.type !== 'scroll') {
+                if (e.type !== 'scroll') {
                     jarallaxList[k].coverImage();
                     jarallaxList[k].clipContainer();
                 }
@@ -656,12 +654,11 @@
     addEventListener(window, 'orientationchange', update);
     addEventListener(window, 'load', update);
 
-
     // global definition
     var plugin = function (items) {
         // check for dom element
         // thanks: http://stackoverflow.com/questions/384286/javascript-isdom-how-do-you-check-if-a-javascript-object-is-a-dom-object
-        if(typeof HTMLElement === "object" ? items instanceof HTMLElement : items && typeof items === "object" && items !== null && items.nodeType === 1 && typeof items.nodeName==="string") {
+        if (typeof HTMLElement === "object" ? items instanceof HTMLElement : items && typeof items === "object" && items !== null && items.nodeType === 1 && typeof items.nodeName === "string") {
             items = [items];
         }
 
@@ -673,11 +670,11 @@
 
         for (k; k < len; k++) {
             if (typeof options === 'object' || typeof options === 'undefined') {
-                if(!items[k].jarallax) {
+                if (!items[k].jarallax) {
                     items[k].jarallax = new Jarallax(items[k], options);
                 }
             }
-            else if(items[k].jarallax) {
+            else if (items[k].jarallax) {
                 ret = items[k].jarallax[options].apply(items[k].jarallax, args);
             }
             if (typeof ret !== 'undefined') {
@@ -698,7 +695,7 @@
     };
 
     // jQuery support
-    if(typeof jQuery !== 'undefined') {
+    if (typeof jQuery !== 'undefined') {
         var jQueryPlugin = function () {
             var args = arguments || [];
             Array.prototype.unshift.call(args, this);

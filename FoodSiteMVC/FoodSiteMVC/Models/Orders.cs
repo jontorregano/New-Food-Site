@@ -6,5 +6,4 @@
         public string customerName { get; set; }
         public decimal orderPrice { get; set; }
     }
-
 }

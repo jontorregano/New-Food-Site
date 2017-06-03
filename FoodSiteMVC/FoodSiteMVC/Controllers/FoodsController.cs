@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using FoodSiteMVC.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using FoodSiteMVC.Models;
 
 namespace FoodSiteMVC.Controllers
 {
@@ -42,11 +38,11 @@ namespace FoodSiteMVC.Controllers
         }
 
         // POST: Foods/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,foodName,foodPrice,foodImage")] Foods foods)
+        public ActionResult Create([Bind(Include = "Id,foodName,foodPrice,foodTag,foodType,foodSize")] Foods foods)
         {
             if (ModelState.IsValid)
             {
@@ -74,11 +70,11 @@ namespace FoodSiteMVC.Controllers
         }
 
         // POST: Foods/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,foodName,foodPrice,foodImage")] Foods foods)
+        public ActionResult Edit([Bind(Include = "Id,foodName,foodPrice,foodTag,foodType,foodSize")] Foods foods)
         {
             if (ModelState.IsValid)
             {

@@ -18,7 +18,13 @@
             @Html.DisplayNameFor(model => model.foodPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.foodImage)
+            @Html.DisplayNameFor(model => model.foodTag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.foodType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.foodSize)
         </th>
         <th></th>
     </tr>
@@ -32,14 +38,21 @@
             @Html.DisplayFor(modelItem => item.foodPrice)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.foodImage)
+            @Html.DisplayFor(modelItem => item.foodTag)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.foodType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.foodSize)
+        </td>
+        <td>
+          @Html.ActionLink("Edit", "Edit", new { id=item.Id })
+            @*
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            *@
         </td>
     </tr>
 }
-
 </table>
