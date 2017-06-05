@@ -59,6 +59,7 @@ html {
 
 body {
   margin: 0;
+  background-color: E6DD93;
 }
 
 a:focus {
@@ -562,6 +563,10 @@ h4 small,
   border-bottom: 1px solid #eeeeee;
 }
 
+.header-color {
+	background-color: E6DD93;
+}
+
 ul,
 ol {
   margin-top: 0;
@@ -781,6 +786,16 @@ pre code {
 
 .container:after {
   clear: both;
+}
+
+.logo{
+background:no-repeat url(/Content/images/GING.png);
+height:15px;
+width:20px;
+overflow:hidden;
+float:left;
+border:none;
+display:inline;
 }
 
 .row {
